@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para Lina</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,500&family=DM+Sans:wght@400;500;600&display=swap">
+<style>
+  /* Layout: a stage. Lina's name sits alone under a spotlight beam, the letter reads below it, and a ticket closes the page. */
+  :root {
+    --bg: #1c0e1b;
+    --bg-2: #2b1529;
+    --fg: #f8eaf0;
+    --muted: #c9a8ba;
+    --accent: #ff7f9f;
+    --on-accent: #2a0f22;
+    --glow: #ffd7a1;
+    --line: rgba(248, 234, 240, 0.18);
+    --display: "Bodoni Moda", "Didot", "Times New Roman", serif;
+    --body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #fcf0f3;
+      --bg-2: #f6dfe7;
+      --fg: #3b1631;
+      --muted: #7d5169;
+      --accent: #bf2c5b;
+      --on-accent: #ffffff;
+      --glow: #ffffff;
+      --line: rgba(59, 22, 49, 0.18);
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #fcf0f3;
+    --bg-2: #f6dfe7;
+    --fg: #3b1631;
+    --muted: #7d5169;
+    --accent: #bf2c5b;
+    --on-accent: #ffffff;
+    --glow: #ffffff;
+    --line: rgba(59, 22, 49, 0.18);
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--body);
+    font-size: 1rem;
+    line-height: 1.6;
+    padding-block: 0 4rem;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .wrap { max-width: 40rem; margin: 0 auto; }
+
+  /* Stage */
+  .stage {
+    position: relative;
+    isolation: isolate;
+    text-align: center;
+    padding-block: clamp(3rem, 10vw, 5.5rem) clamp(2rem, 6vw, 3.5rem);
+  }
+  .stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(ellipse 65% 85% at var(--mx, 50%) var(--my, 38%),
+      color-mix(in srgb, var(--glow) 34%, transparent), transparent 72%);
+  }
+  .stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--glow) 30%, transparent), transparent 85%);
+    clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%);
+    opacity: 0.55;
+  }
+  .eyebrow {
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    margin: 0.1em 0 0;
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(5.5rem, 31vw, 13rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 60px color-mix(in srgb, var(--glow) 45%, transparent);
+  }
+  .tag {
+    margin: 1rem 0 0;
+    color: var(--muted);
+    font-size: 1.0625rem;
+  }
+
+  /* Letter */
+  .letter { padding-block: 1.5rem 2.5rem; }
+  .letter .opening {
+    margin: 0 0 1.5rem;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    line-height: 1.1;
+    color: var(--accent);
+  }
+  .letter p {
+    margin: 0 0 1.25rem;
+    font-size: 1.125rem;
+    line-height: 1.78;
+    max-width: 65ch;
+  }
+  .letter .vow {
+    margin-top: 2rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(1.4rem, 4.6vw, 1.75rem);
+    line-height: 1.4;
+    text-wrap: balance;
+  }
+  .sign {
+    margin: 2rem 0 0;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.75rem;
+    text-align: right;
+    color: var(--accent);
+  }
+
+  /* Things */
+  .things { padding-block: 2rem; border-top: 1px solid var(--line); }
+  h2 {
+    margin: 0 0 1rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .things ul { list-style: none; margin: 0; padding: 0; }
+  .things li {
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(1.5rem, 5.6vw, 2.125rem);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  .things li:last-child { border-bottom: 0; }
+
+  /* Counter */
+  .together { padding-block: 2rem 2.5rem; border-top: 1px solid var(--line); text-align: center; }
+  .since {
+    margin: 0 0 1.5rem;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(1.4rem, 5vw, 1.875rem);
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+  .units {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 560px) { .units { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+  .unit {
+    padding: 0.9rem 0.25rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    background: var(--bg-2);
+  }
+  .unit b {
+    display: block;
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+    line-height: 1;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .unit span {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .total { margin: 1.25rem 0 0; color: var(--muted); font-size: 1rem; font-variant-numeric: tabular-nums; }
+
+  /* Ticket */
+  .ticket {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    margin-top: 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    background: var(--bg-2);
+    overflow: hidden;
+  }
+  .ticket-main { padding: 1.5rem; min-width: 0; }
+  .ticket-main .k {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .ticket-main .t {
+    margin: 0.4rem 0 1rem;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(1.6rem, 6vw, 2.1rem);
+    line-height: 1.1;
+  }
+  .ticket dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 1rem; font-size: 0.9375rem; }
+  .ticket dt { color: var(--muted); }
+  .ticket dd { margin: 0; font-weight: 500; }
+  .ticket-stub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1.25rem;
+    border-left: 2px dashed var(--line);
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 2.5rem;
+    color: var(--accent);
+    writing-mode: vertical-rl;
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 420px) {
+    .ticket { grid-template-columns: 1fr; }
+    .ticket-stub { writing-mode: horizontal-tb; border-left: 0; border-top: 2px dashed var(--line); padding: 0.9rem; font-size: 1.75rem; }
+  }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="stage" id="stage">
+    <p class="eyebrow">Para</p>
+    <h1>Lina</h1>
+    <p class="tag">Esto es solo para vos.</p>
+  </header>
+
+  <main>
+    <article class="letter">
+      <p class="opening">Mi amor:</p>
+
+      <p>No sabía muy bien cómo empezar esto, así que lo voy a decir como me sale. Sin vueltas.</p>
+
+      <p>Desde que llegaste, todo se siente distinto. No porque mi vida antes fuera mala, sino porque con vos todo tiene más sentido. Las charlas tontas, los días que no hacemos nada y igual son los mejores.</p>
+
+      <p>Sos mi lugar seguro. La única persona con la que puedo ser yo, sin careta, sin miedo a que me juzguen. Con vos puedo contar lo que me pasa, reírme hasta que me duela la panza, y quedarme en silencio sin que sea incómodo.</p>
+
+      <p>Hay algo que me pasa con vos y no me pasa con nadie: apenas te vas, ya te extraño. Y no es dependencia, es que posta me encanta estar con vos. Me encanta tu risa, tu forma de hablar, cómo me mirás cuando te cuento algo que me pone feliz.</p>
+
+      <p>No sé explicarte bien todo lo que siento, porque decir "te amo" me queda corto. Es más que eso. Es que quiero que todo lo bueno que me pase, me pase con vos. Quiero seguir sumando momentos, fotos feas, anécdotas que solo nosotros entendemos, y seguir creciendo a tu lado.</p>
+
+      <p>Gracias por quedarte. Por elegirme todos los días, incluso cuando estoy insoportable. Por ser mi compañera, mi mejor amiga, y la persona que más quiero en este mundo.</p>
+
+      <p>Tengo esto, que es mío, de verdad. Estas palabras que salen de lo que siento.</p>
+
+      <p class="vow">Si algún día dudás de algo, no dudes de esto: te amo, y te elijo. Hoy, mañana, y cada día que venga.</p>
+
+      <p class="sign">Siempre tuyo</p>
+    </article>
+
+    <section class="things" aria-labelledby="things-h">
+      <h2 id="things-h">Lo que más me encanta</h2>
+      <ul>
+        <li>Tu risa.</li>
+        <li>Tu forma de hablar.</li>
+        <li>Cómo me mirás cuando te cuento algo que me pone feliz.</li>
+      </ul>
+    </section>
+
+    <section class="together" aria-labelledby="tg-h">
+      <h2 id="tg-h">Nuestro tiempo</h2>
+      <p class="since">Juntos desde el 2 de marzo de 2025</p>
+      <ul class="units">
+        <li class="unit"><b id="u-y">0</b><span>Años</span></li>
+        <li class="unit"><b id="u-m">0</b><span>Meses</span></li>
+        <li class="unit"><b id="u-d">0</b><span>Días</span></li>
+        <li class="unit"><b id="u-h">0</b><span>Horas</span></li>
+        <li class="unit"><b id="u-i">0</b><span>Min</span></li>
+        <li class="unit"><b id="u-s">0</b><span>Seg</span></li>
+      </ul>
+      <p class="total" id="total"></p>
+    </section>
+
+    <section class="ticket" aria-label="Entrada">
+      <div class="ticket-main">
+        <p class="k">Función única</p>
+        <p class="t">Mi vida con Lina</p>
+        <dl>
+          <dt>Reservado</dt><dd>Lina</dd>
+          <dt>Lugar</dt><dd>Fila 1, al lado mío</dd>
+          <dt>Válida</dt><dd>Hoy, mañana y cada día que venga</dd>
+        </dl>
+      </div>
+      <div class="ticket-stub" aria-hidden="true">&hearts; 1</div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  var stage = document.getElementById("stage");
+  stage.addEventListener("pointermove", function (e) {
+    var r = stage.getBoundingClientRect();
+    stage.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100) + "%");
+    stage.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100) + "%");
+  });
+
+  // Juntos desde el 2 de marzo de 2025 (año, mes 0-based, día)
+  var START_Y = 2025, START_M = 2, START_D = 2;
+  var start = new Date(START_Y, START_M, START_D, 0, 0, 0);
+  var el = {
+    y: document.getElementById("u-y"), m: document.getElementById("u-m"),
+    d: document.getElementById("u-d"), h: document.getElementById("u-h"),
+    i: document.getElementById("u-i"), s: document.getElementById("u-s"),
+    total: document.getElementById("total")
+  };
+  function tick() {
+    var now = new Date();
+    var y = now.getFullYear() - START_Y;
+    var m = now.getMonth() - START_M;
+    var d = now.getDate() - START_D;
+    if (d < 0) {
+      m -= 1;
+      d += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+    }
+    if (m < 0) { y -= 1; m += 12; }
+    if (y < 0) { y = 0; m = 0; d = 0; }
+    el.y.textContent = y;
+    el.m.textContent = m;
+    el.d.textContent = d;
+    el.h.textContent = now.getHours();
+    el.i.textContent = now.getMinutes();
+    el.s.textContent = now.getSeconds();
+    var days = Math.max(0, Math.floor((now - start) / 86400000));
+    el.total.textContent = "Son " + days.toLocaleString("es-AR") + " días eligiéndonos.";
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
